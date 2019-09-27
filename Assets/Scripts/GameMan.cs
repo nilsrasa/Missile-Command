@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GameMan : MonoBehaviour
 {
+    public GameObject counterMissile;
+    public int counterMissilePoolSize;
     public GameObject missile;
     public int missilePoolSize;
     public GameObject blast;
@@ -22,6 +24,7 @@ public class GameMan : MonoBehaviour
         }
 
         //Instantiate pools
+        PoolMan.Instance.CreatePool(counterMissile, counterMissilePoolSize);
         PoolMan.Instance.CreatePool(missile, missilePoolSize);
         PoolMan.Instance.CreatePool(blast, missilePoolSize+lives);
         //Start spawning missiles
@@ -44,19 +47,22 @@ public class GameMan : MonoBehaviour
         return cities[Random.Range(0, cities.Length)].transform.position;
     }
 
+    public void SpawnCounterMissile(Vector3 target){
+        PoolMan.Instance.ReuseObject(counterMissile, Vector3.up, Quaternion.identity)
+                .GameObject.GetComponent<Missile>()
+                .target = target;
+    }
+
     IEnumerator spawn(){
         while(true){
             yield return new WaitForSeconds(2);
             //Picks a random spawn position along the top
             Vector3 pos = Vector3.up * bounds.z + Vector3.right * Random.Range(bounds.x, bounds.y);
-            //Picks random target
-            Vector3 dest = RandomTarget();
-            //Finds the angle direction between the position and the target
-            Quaternion dir = Quaternion.LookRotation((dest - pos).normalized);
 
-            Debug.Log("Pos: "+pos+", Dest: "+dest+" dir: "+dir);
             //Spawn an object from the pool
-            PoolMan.Instance.ReuseObject(missile, pos, dir);
+            PoolMan.Instance.ReuseObject(missile, pos, Quaternion.identity)
+                .GameObject.GetComponent<Missile>()
+                .target = RandomTarget();
         }
     }
 }

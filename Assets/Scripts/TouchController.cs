@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class TouchController : MonoBehaviour
+public class TouchController : MonoBehaviour, IPointerClickHandler
 {
+    public GameMan gameManager;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,5 +16,12 @@ public class TouchController : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        Vector3 pos = Camera.main.ScreenToWorldPoint(eventData.position);
+        pos.z = 0;
+        gameManager.SpawnCounterMissile(pos);
     }
 }
