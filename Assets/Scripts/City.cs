@@ -7,7 +7,6 @@ public class City : MonoBehaviour
 {
     public GameObject blastPref;
     public float blastRadius;
-    public System.Action OnDestroyed;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,8 +25,8 @@ public class City : MonoBehaviour
         PoolMan.Instance.ReuseObject(blastPref, transform.position, Quaternion.identity)
             .GameObject.GetComponent<Blast>()
             .blastRadius = blastRadius;
-        if (OnDestroyed != null){
-            OnDestroyed();
+        if (GameEvents.cityDestroyed != null){
+            GameEvents.cityDestroyed(this);
         }
     }
 }

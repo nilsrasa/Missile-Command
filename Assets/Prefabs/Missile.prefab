@@ -215,10 +215,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8132fe3d4e47a004791d4f6913559e32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isCounter: 0
   speed: 1
   blastPref: {fileID: 3220756357997783560, guid: 9d3d95b36d990944abc525ddfb0f60d7,
     type: 3}
   blastRadius: 3
+  points: 20
 --- !u!54 &8178271217745146436
 Rigidbody:
   m_ObjectHideFlags: 0

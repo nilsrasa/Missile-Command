@@ -11,17 +11,15 @@ public class GameMan : MonoBehaviour
     public GameObject blast;
     public City[] cities;
     public Vector4 bounds;
-    private int lives;
+    private int lives, score;
     private PoolMan poolManager;
     // Start is called before the first frame update
     void Start()
     {
         lives = cities.Length;
 
-        foreach (City city in cities)
-        {
-            city.OnDestroyed += CityDestroyed;
-        }
+        GameEvents.cityDestroyed += CityDestroyed;
+        GameEvents.missileDestroyed += MissileDestroyed;
 
         //Instantiate pools
         PoolMan.Instance.CreatePool(counterMissile, counterMissilePoolSize);
@@ -37,9 +35,16 @@ public class GameMan : MonoBehaviour
         
     }
 
-    void CityDestroyed(){
+    void CityDestroyed(City city){
         lives--;
         Debug.Log("City was destroyed, "+lives+" remaining");
+    }
+
+    void MissileDestroyed(int points){
+        score += points;
+        if (GameEvents.uiScore != null){
+            GameEvents.uiScore(score);
+        }
     }
 
     Vector3 RandomTarget(){

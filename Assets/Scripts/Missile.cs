@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class Missile : MonoBehaviour, IPoolable
 {
+    public bool isCounter;
     public float speed;
     public GameObject blastPref;
     public float blastRadius;
-
+    public int points;
     private Vector3 _target;
     public Vector3 target{
         set {
@@ -27,8 +28,10 @@ public class Missile : MonoBehaviour, IPoolable
     // Update is called once per frame
     void Update()
     {
-        if (Vector3.Distance(transform.position, _target) <= speed * Time.deltaTime){
-            Destroy();
+        if (isCounter){
+            if (Vector3.Distance(transform.position, _target) <= speed * Time.deltaTime){
+                Destroy();
+            }
         }
     }
 
@@ -55,8 +58,15 @@ public class Missile : MonoBehaviour, IPoolable
 
     void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.tag.Equals("City")){
-            other.gameObject.GetComponent<City>().Destroy();
+        if (!isCounter){
+            string tag = other.gameObject.tag;
+            if (tag.Equals("City")){
+                other.gameObject.GetComponent<City>().Destroy();
+            } else if (tag.Equals("Blast") || tag.Equals("Missile")){
+                if (GameEvents.missileDestroyed != null){
+                    GameEvents.missileDestroyed(points);
+                }
+            }
         }
         Destroy();
     }

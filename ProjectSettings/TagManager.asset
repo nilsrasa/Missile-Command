@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Missile
   - City
+  - Blast
   layers:
   - Default
   - TransparentFX

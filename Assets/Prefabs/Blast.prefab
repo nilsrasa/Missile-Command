@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3220756357997783561}
   m_Layer: 10
   m_Name: Blast
-  m_TagString: Untagged
+  m_TagString: Blast
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -105,5 +105,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startScale: {x: 0.5, y: 0.5, z: 0.5}
-  blastRadius: 5
-  speed: 3
