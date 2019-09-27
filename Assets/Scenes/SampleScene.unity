@@ -437,8 +437,8 @@ Camera:
   m_GameObject: {fileID: 534669902}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
@@ -652,13 +652,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   missile: {fileID: 8395430985970896736, guid: a35c852ae3aa1074bac3da1eec46b815, type: 3}
-  missilePoolSize: 20
+  missilePoolSize: 10
+  blast: {fileID: 3220756357997783560, guid: 9d3d95b36d990944abc525ddfb0f60d7, type: 3}
   cities:
   - {fileID: 157731008806572084}
   - {fileID: 396261627}
   - {fileID: 774585780}
   - {fileID: 644251054}
   - {fileID: 878864455}
+  bounds: {x: -10, y: 10, z: 13, w: 0}
 --- !u!4 &971289003
 Transform:
   m_ObjectHideFlags: 0
@@ -759,7 +761,7 @@ Transform:
   m_GameObject: {fileID: 1342973799}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -0.5, z: 0}
-  m_LocalScale: {x: 225, y: 1, z: 2}
+  m_LocalScale: {x: 25, y: 1, z: 2}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4

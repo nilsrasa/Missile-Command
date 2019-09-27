@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class City : MonoBehaviour
 {
+    public GameObject blastPref;
+    public float blastRadius;
+    public System.Action OnDestroyed;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,12 +20,14 @@ public class City : MonoBehaviour
         
     }
 
-    void OnCollisionEnter(Collision other)
-    {
-        if (other.gameObject.tag.Equals("Missile")){
-            other.gameObject.GetComponent<Missile>().Destroy();
-            //TODO: show explosion
-            gameObject.SetActive(false);
+    public void Destroy(){
+        //Todo destroy
+        gameObject.SetActive(false);
+        PoolMan.Instance.ReuseObject(blastPref, transform.position, Quaternion.identity)
+            .GameObject.GetComponent<Blast>()
+            .blastRadius = blastRadius;
+        if (OnDestroyed != null){
+            OnDestroyed();
         }
     }
 }
